@@ -47,7 +47,7 @@ authRouter.get("/api/user/:_id",  async (req, res) => {
 // create post: creating a post
 
 authRouter.post("/api/:user_id/post", async (req, res) => {
-  console.log("**********/api/signup request***********");
+  console.log("**********/api/create post request***********");
   try {
     const { post_message } = req.body;
     const user_id = req.params.user_id;
@@ -69,7 +69,7 @@ authRouter.post("/api/:user_id/post", async (req, res) => {
       }
       
 
-      return res.json(userPostab);
+      return res.json(userPost);
     
     
   } catch (e) {
@@ -99,7 +99,7 @@ authRouter.delete("/api/post/:post_id", async (req, res) => {
     const { post_id } = req.params;
     let userPost = await UserPost.findByIdAndUpdate(post_id, { is_active:false });
     userPost = await userPost.save();
-    return res.json({userPost});
+    return res.json({msg:"Your post is deleted"});
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
